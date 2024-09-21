@@ -23,7 +23,7 @@ The application performs several statistical calculations based on the following
 5. **Sample Size**: Optionally, input the number of samples to calculate the power for a fixed sample size.
 ## **Demo**
 
-You can try the live version of this tool here: [Demo Link]()
+You can try the live version of this tool here: [Demo Link](https://chrysidoidea.github.io/Statistical-Power-Analysis-Calculator/)
 ### **Requirements:**
 - Node.js
 - npm (Node Package Manager)
@@ -77,4 +77,4 @@ Contributions are welcome! If you’d like to improve the tool, please fork the 
 
 ## **Acknowledgments**
 
-This calculator was inspired by the needs of researchers and data scientists for an easy-to-use tool that makes power analysis accessible and efficient for experimental design.
+This calculator was inspired by the needs of researchers and data scientists for an easy-to-use tool that makes power analysis accessible and efficient for experimental design.e
