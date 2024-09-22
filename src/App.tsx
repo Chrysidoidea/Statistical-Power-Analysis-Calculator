@@ -1,10 +1,11 @@
 import "./App.css";
-import { calculatePower } from "./core/calculator";
 import { useAppContext } from "./context/AppContext";
+import { transitionEffect } from "./lib/handleAnimation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { faCloudArrowUp } from "@fortawesome/free-solid-svg-icons/faCloudArrowUp";
 import { handleFileUpload } from "./core/dataParser";
+import Form from "./components/form/Form";
 
 export const App = () => {
   const {
@@ -17,19 +18,12 @@ export const App = () => {
     desiredPower,
     setDesiredPower,
     sampleSize,
-    setSampleSize
+    setSampleSize,
   } = useAppContext();
 
   document
     .getElementById("dataFile")
     ?.addEventListener("change", handleFileUpload);
-  const transitionEffect = () => {
-    setFade(true);
-
-    setTimeout(() => {
-      setFade(false);
-    }, 200);
-  };
 
   return (
     <>
@@ -156,7 +150,7 @@ export const App = () => {
             <button
               className={"switcher" + (fade ? " fade" : "")}
               onClick={() => {
-                transitionEffect();
+                transitionEffect({ setFade });
                 setTimeout(() => {
                   setInputType("neutral");
                 }, 100);
@@ -173,7 +167,7 @@ export const App = () => {
           <button
             className={"switcher" + (fade ? " fade" : "")}
             onClick={() => {
-              transitionEffect();
+              transitionEffect({ setFade });
               setTimeout(() => {
                 setInputType("manual");
               }, 100);
@@ -184,7 +178,7 @@ export const App = () => {
           <button
             className={"switcher" + (fade ? " fade" : "")}
             onClick={() => {
-              transitionEffect();
+              transitionEffect({ setFade });
               setTimeout(() => {
                 setInputType("upload");
               }, 100);
@@ -195,7 +189,7 @@ export const App = () => {
           <button
             className={"switcher" + (fade ? " fade" : "")}
             onClick={() => {
-              transitionEffect();
+              transitionEffect({ setFade });
               setTimeout(() => {
                 setInputType("about");
               }, 100);
@@ -205,134 +199,7 @@ export const App = () => {
           </button>
         </section>
       )}
-      {inputType === "manual" && (
-        <form action="" id="powerForm" className={fade ? "fade" : "unfade"}>
-          <FontAwesomeIcon
-            id="close"
-            onClick={() => {
-              document.getElementById("results")!.innerHTML = "";
-              transitionEffect();
-              setTimeout(() => {
-                setInputType("neutral");
-              }, 100);
-            }}
-            icon={faTimes}
-          ></FontAwesomeIcon>
-          <label htmlFor="controlGroup">
-            {" "}
-            Control Group Data (comma-separated):
-          </label>
-          <input
-            type="text"
-            id="controlGroup"
-            placeholder="e.g., 140, 135, 142"
-            required
-          />
-
-          <label htmlFor="treatmentGroup">
-            {" "}
-            Treatment Group Data (comma-separated):
-          </label>
-          <input
-            type="text"
-            id="treatmentGroup"
-            placeholder="e.g., 132, 130, 128"
-            required
-          />
-
-          <label htmlFor="alpha">Significance Level (Alpha):</label>
-          <input
-            type="number"
-            id="alpha"
-            step="0.01"
-            value={alpha}
-            onChange={(e) => setAlpha(parseFloat(e.target.value))}
-            required
-          />
-
-          <label htmlFor="desiredPower">
-            Desired Power (e.g., 0.8 equal 80%)
-          </label>
-          <input
-            type="number"
-            step="0.01"
-            id="desiredPower"
-            value={desiredPower}
-            onChange={(e) => setDesiredPower(parseFloat(e.target.value))}
-            required
-          />
-
-          <label htmlFor="sampleSize">
-            Sample Size (Optional, for Power Calculation)
-          </label>
-          <input
-            type="number"
-            id="sampleSize"
-            placeholder="e.g., 30"
-            value={sampleSize}
-            onChange={(e) => setSampleSize(parseInt(e.target.value))}
-          />
-
-          <button type="button" id="button" onClick={calculatePower}>
-            Calculate
-          </button>
-        </form>
-      )}
-      {inputType === "upload" && (
-        <form action="" id="powerForm" className={fade ? "fade" : "unfade"}>
-          <FontAwesomeIcon
-            id="close"
-            onClick={() => {
-              document.getElementById("results")!.innerHTML = "";
-              transitionEffect();
-              setTimeout(() => {
-                setInputType("neutral");
-              }, 100);
-            }}
-            icon={faTimes}
-          ></FontAwesomeIcon>
-          <p>Only .csv and .xlsx files are supported</p>
-          <label htmlFor="dataFile" id="dataFileLabel">
-            <input type="file" id="dataFile" accept=".csv, .xlsx" />
-            <FontAwesomeIcon
-              icon={faCloudArrowUp}
-              className="uploadIcon"
-            ></FontAwesomeIcon>
-          </label>
-          <label htmlFor="alpha">Significance Level (Alpha):</label>
-          <input
-            type="number"
-            id="alpha"
-            step="0.01"
-            value={alpha}
-            onChange={(e) => setAlpha(parseFloat(e.target.value))}
-            required
-          />
-          <label htmlFor="desiredPower">
-            Desired Power (e.g., 0.8 equal 80%)
-          </label>
-          <input
-            type="number"
-            step="0.01"
-            id="desiredPower"
-            value={desiredPower}
-            onChange={(e) => setDesiredPower(parseFloat(e.target.value))}
-            required
-          />
-          <label htmlFor="sampleSize">
-            Sample Size (Optional, for Power Calculation)
-          </label>
-          <input
-            type="number"
-            id="sampleSize"
-            placeholder="e.g., 10"
-            value={sampleSize}
-            onChange={(e) => setSampleSize(parseInt(e.target.value))}
-          />
-
-          <div id="container"></div>
-        </form>
-      )}
+      {(inputType === "manual" || inputType === "upload") && <Form />}
       <div id="results"></div>
       <footer id="footer">v0.0.1 </footer>
     </>
