@@ -1,9 +1,6 @@
 import "./App.css";
 import { useAppContext } from "./context/AppContext";
 import { transitionEffect } from "./lib/handleAnimation";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTimes } from "@fortawesome/free-solid-svg-icons";
-import { faCloudArrowUp } from "@fortawesome/free-solid-svg-icons/faCloudArrowUp";
 import { handleFileUpload } from "./core/dataParser";
 import Form from "./components/form/Form";
 
@@ -13,12 +10,6 @@ export const App = () => {
     setInputType,
     fade,
     setFade,
-    alpha,
-    setAlpha,
-    desiredPower,
-    setDesiredPower,
-    sampleSize,
-    setSampleSize,
   } = useAppContext();
 
   document
