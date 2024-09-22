@@ -33,7 +33,7 @@ export const App = () => {
           <div id="results"></div>
         </>
       )}
-      <footer id="footer">v0.0.1 </footer>
+      <footer id="footer">v0.0.2 </footer>
     </>
   );
 };
