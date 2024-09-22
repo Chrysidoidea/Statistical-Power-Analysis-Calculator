@@ -1,17 +1,24 @@
 import "./App.css";
 import { calculatePower } from "./core/calculator";
-import { useState } from "react";
+import { useAppContext } from "./context/AppContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { faCloudArrowUp } from "@fortawesome/free-solid-svg-icons/faCloudArrowUp";
 import { handleFileUpload } from "./core/dataParser";
 
 export const App = () => {
-  const [inputType, setInputType] = useState("neutral");
-  const [fade, setFade] = useState(false);
-  const [alpha, setAlpha] = useState(0.05);
-  const [desiredPower, setDesiredPower] = useState(0.8);
-  const [sampleSize, setSampleSize] = useState(30);
+  const {
+    inputType,
+    setInputType,
+    fade,
+    setFade,
+    alpha,
+    setAlpha,
+    desiredPower,
+    setDesiredPower,
+    sampleSize,
+    setSampleSize
+  } = useAppContext();
 
   document
     .getElementById("dataFile")
