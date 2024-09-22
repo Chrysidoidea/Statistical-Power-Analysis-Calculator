@@ -5,7 +5,7 @@
 
 The Statistical Power Analysis Calculator is a web-based tool designed for scientists, researchers, and statisticians to calculate key statistical metrics such as **effect size (Cohen’s d)**, **statistical power**, and **required sample size** for experiments. These calculations are critical for planning and interpreting experiments, ensuring that studies are sufficiently powered to detect meaningful effects.
 
-![example](./assets/example.png)
+![example](./src/assets/example.png)
 
 ## **Key Features**
 
