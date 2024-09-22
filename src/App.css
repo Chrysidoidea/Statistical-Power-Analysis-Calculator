@@ -55,7 +55,6 @@ body {
   background-color: #fff1e4;
 }
 
-
 #results {
   margin: 0 auto;
   font-size: 20px;
@@ -85,6 +84,7 @@ button {
 }
 #close {
   background-color: transparent;
+  user-select: none;
   position: absolute;
   top: .2rem;
   right: .5rem;
