@@ -1,12 +1,12 @@
 import "./App.css";
 import { useAppContext } from "./context/AppContext";
-import { transitionEffect } from "./lib/handleAnimation";
 import { handleFileUpload } from "./core/dataParser";
 import Form from "./components/form/Form";
 import About from "./components/about/About";
+import Menu from "./components/menu/Menu";
 
 export const App = () => {
-  const { inputType, setInputType, fade, setFade } = useAppContext();
+  const { inputType } = useAppContext();
 
   document
     .getElementById("dataFile")
@@ -26,45 +26,13 @@ export const App = () => {
         sufficiently powered to detect meaningful effects.
       </p>
       {inputType === "about" && <About />}
-      {inputType === "neutral" && (
-        <section>
-          <button
-            className={"switcher" + (fade ? " fade" : "")}
-            onClick={() => {
-              transitionEffect({ setFade });
-              setTimeout(() => {
-                setInputType("manual");
-              }, 100);
-            }}
-          >
-            Enter Data Manually
-          </button>
-          <button
-            className={"switcher" + (fade ? " fade" : "")}
-            onClick={() => {
-              transitionEffect({ setFade });
-              setTimeout(() => {
-                setInputType("upload");
-              }, 100);
-            }}
-          >
-            Upload CSV/Excel
-          </button>
-          <button
-            className={"switcher" + (fade ? " fade" : "")}
-            onClick={() => {
-              transitionEffect({ setFade });
-              setTimeout(() => {
-                setInputType("about");
-              }, 100);
-            }}
-          >
-            About
-          </button>
-        </section>
+      {inputType === "neutral" && <Menu />}
+      {(inputType === "manual" || inputType === "upload") && (
+        <>
+          <Form />
+          <div id="results"></div>
+        </>
       )}
-      {(inputType === "manual" || inputType === "upload") && <Form />}
-      <div id="results"></div>
       <footer id="footer">v0.0.1 </footer>
     </>
   );

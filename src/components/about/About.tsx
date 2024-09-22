@@ -1,7 +1,7 @@
 import { useAppContext } from "../../context/AppContext";
 import { transitionEffect } from "../../lib/handleAnimation";
 
-const About = () => {
+const About: React.FC = () => {
   const { fade, setFade, setInputType } = useAppContext();
 
   return (
