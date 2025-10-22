@@ -7,15 +7,15 @@ export const handleFileUpload = (event: Event) => {
 
   if (file) {
     Papa.parse(file, {
-      complete: function (results: any) {
+      complete: function (results) {
         const data = results.data;
-        processCSVData(data);
+        processCSVData(data as Record<string, string>[]);
       },
       header: true,
     });
   }
 }
-export const processCSVData = (data: any[]) => {
+export const processCSVData = (data: Record<string, string>[]) => {
   const columnNames = Object.keys(data[0]);
 
   const variableSelectHTML = `

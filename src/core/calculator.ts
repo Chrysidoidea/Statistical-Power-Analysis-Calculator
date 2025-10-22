@@ -104,8 +104,10 @@ export const calculatePower = () => {
   );
 
   let results = `<p>Effect size (Cohen's d): ${effectSize.toFixed(2)}</p>`;
-
-    const sampleSize = parseInt(sampleSizeInput, 10);
+const sampleSize =
+    sampleSizeInput.trim() === ""
+      ? Math.min(n1, n2)
+      : parseInt(sampleSizeInput, 10);
     const power = calculatePowerEffect(effectSize, alpha, sampleSize);
     results += `<p>Power of the test with ${sampleSize} samples: ${power.toFixed(
       4

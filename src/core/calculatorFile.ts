@@ -1,15 +1,16 @@
 import { calculateMean, calculateStandardDeviation, calculateEffectSize, calculatePowerEffect, calculateSampleSize } from "./calculator";
-export const runAnalysis = (data: any[]) => {
+type DataRow = Record<string, string | number>;
+export const runAnalysis = (data: DataRow[]) => {
     const dependentVariable = (document.getElementById('dependentVariable') as HTMLSelectElement).value;
     const groupVariable = (document.getElementById('groupVariable') as HTMLSelectElement).value;
 
     const controlGroup = data
-        .filter((row: any) => row[groupVariable] === 'Control')
-        .map((row: any) => parseFloat(row[dependentVariable]));
+        .filter((row: DataRow) => row[groupVariable] === 'Control')
+        .map((row: DataRow) => parseFloat(String(row[dependentVariable])));
     
     const treatmentGroup = data
-        .filter((row: any) => row[groupVariable] === 'Treatment')
-        .map((row: any) => parseFloat(row[dependentVariable]));
+        .filter((row: DataRow) => row[groupVariable] === 'Treatment')
+        .map((row: DataRow) => parseFloat(String(row[dependentVariable])));
 
     if (controlGroup.some(isNaN) || treatmentGroup.some(isNaN)) {
         alert("Error: Non-numeric values detected in the selected dependent variable.");
